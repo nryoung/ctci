@@ -19,6 +19,7 @@ the end when I return the finished string.
 def url_encoding(s):
     """
     XXX: WORK IN PROGRESS
+    This is my attempt at converting the book's solution in to Python
     """
     char_array = [c for c in s]
 
@@ -40,6 +41,16 @@ def url_encoding(s):
 
     return "".join(char_array)
 
+
+def url_encoding_easy(s):
+    """
+    Using Python's builtin string replace is by far the easiest way to
+    accomplish this.
+    """
+    return s.rstrip().replace(' ', '%20')
+
+
 if __name__ == '__main__':
     s = "Mr John Smith    "
     print("Url endcoded version of {}: {}".format(s, url_encoding(s)))
+    print("Url endcoded version of {}: {}".format(s, url_encoding_easy(s)))

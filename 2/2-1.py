@@ -11,7 +11,7 @@ from linked_list import LinkedList
 def deduplicate_with_hash(node):
     """
     Makes use of temporary "hash table" (dictionary) to keep track of all the
-    values seen so far.
+    values seen so far. Worst case running time of O(n)
     """
     tracker = {}
     previous = None

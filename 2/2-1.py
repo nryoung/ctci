@@ -23,6 +23,23 @@ def deduplicate_with_hash(node):
             previous = node
         node = node.next
 
+def deduplicate_without_hash(head):
+    """
+    Removes nodes with duplicate values. Uses two "pointers" to keep track of
+    current location. Wrost case running time of O(n**2).
+    """
+    if head is None:
+        return
+
+    current = head
+    while current is not None:
+        runner = current
+        while runner.next is not None:
+            if runner.next.value == current.value:
+                runner.next = runner.next.next
+            else:
+                runner = runner.next
+        current = current.next
 
 if __name__ == '__main__':
     linked_list = LinkedList()
@@ -33,4 +50,14 @@ if __name__ == '__main__':
 
     print("{}".format(linked_list))
     deduplicate_with_hash(linked_list.head)
+    print("{}".format(linked_list))
+
+    linked_list = LinkedList()
+    linked_list.insert_front(72)
+    linked_list.insert_front(300)
+    linked_list.insert_front(72)
+    linked_list.insert_front(11)
+
+    print("{}".format(linked_list))
+    deduplicate_without_hash(linked_list.head)
     print("{}".format(linked_list))

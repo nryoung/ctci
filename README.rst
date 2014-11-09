@@ -1,6 +1,6 @@
 CTCI
 ====
 
-My answers to Cracking The Code Interview by Gayle Laakmann McDowell.
+Cracking The Code Interview:
 
 because we all need practice every once in a while.

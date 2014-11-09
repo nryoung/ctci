@@ -20,25 +20,24 @@ def merge_intervals(intervals):
            and push on to stack
     4. At the end return stack
     """
-    si = sorted(intervals, key=lambda tup: tup[0])
+    sorted_by_lower_bound = sorted(intervals, key=lambda tup: tup[0])
     merged = []
 
-    for tup in si:
+    for higher in sorted_by_lower_bound:
         if not merged:
-            merged.append(tup)
+            merged.append(higher)
         else:
-            b = merged.pop()
-            if b[1] >= tup[0]:
-                new_tup = tuple([b[0], tup[1]])
-                merged.append(new_tup)
+            lower = merged[-1]
+            if higher[0] <= lower[1]:
+                upper_bound = max(lower[1], higher[1])
+                merged[-1] = (lower[0], upper_bound)
             else:
-                merged.append(b)
-                merged.append(tup)
+                merged.append(higher)
     return merged
 
 if __name__ == '__main__':
 
-    l = [(5, 7), (11, 116), (3, 4), (10, 12), (6, 12)]
-    print("Original list of ranges: {}".format(l))
-    merged_list = merge_intervals(l)
-    print("List of ranges after merge_ranges: {}".format(merged_list))
+    overlapping_intervals = [(5, 7), (11, 116), (3, 4), (10, 12), (6, 12)]
+    print("Original list of intervals: {}".format(overlapping_intervals))
+    merged_list = merge_intervals(overlapping_intervals)
+    print("List of intervals after merge_intervals: {}".format(merged_list))

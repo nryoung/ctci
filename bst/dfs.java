@@ -2,18 +2,15 @@
  * Implementation of DFS on BST
  */
 
-BinaryTreenode search(BinaryTreenode root, Comparable key) {
+void search(BinaryTreenode root) {
     // Empty tree
     if (root == null) return;
+    visit(root);
+    root.visited = true;
 
-    // Root is the node we are looking for
-    if (key == root.getKey()) return root;
-
-    if ( if key.compareTo(root.getKey()) < 0){
-        // if key is present it is in left subtree
-        return search(root.getLeft(), key);
-    } else {
-        // if key is present it is in right subtree
-        return search(root.getRight(), key);
+    foreach(Node n in root.adjacent) {
+        if (n.visited == false) {
+            search(n);
+        }
     }
 }

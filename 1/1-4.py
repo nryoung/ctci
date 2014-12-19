@@ -18,28 +18,32 @@ the end when I return the finished string.
 
 def url_encoding(s):
     """
-    XXX: WORK IN PROGRESS
-    This is my attempt at converting the book's solution in to Python
+    Solution from the book converted in to Python. I tried my best to use
+    python idioms but keep true to the nature of the solution.
     """
-    char_array = [c for c in s]
+    chars = [c for c in s]
+    length = len(chars)
 
     space_count = 0
-    for i in range(0, len(char_array)):
-        if i == ' ':
+    for i in range(0, length):
+        if chars[i] == ' ':
             space_count += 1
-    new_len = (len(char_array)-1) + space_count * 2
+    space_count = space_count * 2
 
-    for i in range(len(char_array)-1, 0, -1):
-        if char_array[i] == ' ':
-            char_array[new_len - 1] = '0'
-            char_array[new_len - 2] = '2'
-            char_array[new_len - 3] = '%'
+    new_len = (length + space_count)
+    chars.extend([' '] * space_count)
+
+    for i in range(length-1, 0, -1):
+        if chars[i] == ' ':
+            chars[new_len - 1] = '0'
+            chars[new_len - 2] = '2'
+            chars[new_len - 3] = '%'
             new_len -= 3
         else:
-            char_array[new_len - 1] = char_array[i]
+            chars[new_len - 1] = chars[i]
             new_len -= 1
 
-    return "".join(char_array)
+    return "".join(chars)
 
 
 def url_encoding_easy(s):
@@ -47,10 +51,10 @@ def url_encoding_easy(s):
     Using Python's builtin string replace is by far the easiest way to
     accomplish this.
     """
-    return s.rstrip().replace(' ', '%20')
+    return s.replace(' ', '%20')
 
 
 if __name__ == '__main__':
-    s = "Mr John Smith    "
+    s = "Mr John Smith"
     print("Url endcoded version of {}: {}".format(s, url_encoding(s)))
     print("Url endcoded version of {}: {}".format(s, url_encoding_easy(s)))

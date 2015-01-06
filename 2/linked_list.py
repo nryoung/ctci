@@ -36,9 +36,11 @@ class LinkedList(object):
         return rep
 
     def insert_front(self, value):
-        self.head = Node(value, self.head)
-        if self.tail is None:
-            self.tail = self.head
+        if self.tail is None and self.head is None:
+            # This is the first Node
+            self.head = self.tail = Node(value, None)
+        else:
+            self.head = Node(value, self.head)
 
     def insert_back(self, value):
         if self.empty():
